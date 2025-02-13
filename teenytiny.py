@@ -1,12 +1,23 @@
 from lex import *
+from emit import *
+from parse import *
+import sys
 
 def main():
-     source = "IF+-123foo*THEN/"
-     lexer = Lexer(source)
+    print("Teeny Tiny Compiler")
+    
+    if len(sys.argv) != 2:
+        sys.exit("Error: Compiler needs source file as argument.")
+    with open(sys.argv[1], 'r') as inputFile:
+        source = inputFile.read()
 
-     token = lexer.getToken()
-     while token.kind != TokenType.EOF:
-        print(token.kind)
-        token = lexer.getToken()
+    # Initialize the lexer, emitter and parser.
+    lexer = Lexer(source)
+    emitter = Emitter("out.c")
+    parser = Parser(lexer, emitter)
 
+    parser.program() # Start the parser.
+    emitter.writeFile() # Write the output to file.
+    print("Compiling completed.")
+        
 main()
