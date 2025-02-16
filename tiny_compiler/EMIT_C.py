@@ -1,3 +1,4 @@
+#=========================================================================
 # Emitter object keeps track of the generated code and outputs it.
 class Emitter:
     def __init__(self, fullPath):
@@ -17,3 +18,7 @@ class Emitter:
     def writeFile(self):
         with open(self.fullPath, 'w') as outputFile:
             outputFile.write(self.header + self.code)
+#=========================================================================
+# @2025 EvieLyra™
+# - to be expanded
+# - Examples: Emitter C / Emitter Assembly (86x) to build to std .exe
